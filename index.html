@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caffeine Security - Cybersecurity Consulting</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+        :root {
+            --primary: #b967ff;
+            --secondary: #6a1b9a;
+            --background: #1a1a1a;
+            --text: #e0e0e0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Share Tech Mono', monospace;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23333' fill-opacity='0.4' fill-rule='evenodd'%3E%3Cpath d='M0 0h40v40H0V0zm1 1h38v38H1V1z'/%3E%3C/g%3E%3C/svg%3E");
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 2rem;
+            position: relative;
+            z-index: 2;
+            margin-top: 1rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .logo {
+            width: 200px;
+            height: auto;
+            margin: 1rem auto;
+            filter: drop-shadow(0 0 10px var(--primary));
+        }
+
+        h1, h2 {
+            color: var(--primary);
+            text-shadow: 0 0 10px var(--primary);
+            margin-bottom: 2rem;
+        }
+
+        .crt-effect {
+            animation: textShadow 1.6s infinite;
+            position: relative;
+        }
+
+        .crt-effect::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.15),
+                rgba(0, 0, 0, 0.15) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+        }
+
+        .services {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+            max-width: 800px;
+            margin: 0 auto 4rem auto;
+            opacity: 1;
+            position: relative;
+            z-index: 2;
+        }
+
+        .service-card {
+            width: 100%;
+            margin: 0 auto;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 3rem;
+            border: 1px solid var(--primary);
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px var(--primary);
+        }
+
+        .contact {
+            text-align: center;
+            margin-top: 6rem;
+            padding: 2rem;
+            border-top: 1px solid var(--primary);
+            opacity: 1;
+            transform: none;
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        .contact h2 {
+            color: var(--primary);
+            text-shadow: 0 0 10px var(--primary);
+            margin-bottom: 2rem;
+        }
+
+        .contact p {
+            color: var(--text);
+        }
+
+        @keyframes textShadow {
+            0% { text-shadow: 0.4389924193300864px 0 1px rgba(185,103,255,0.5), -0.4389924193300864px 0 1px rgba(0,0,255,0.3), 0 0 3px; }
+            5% { text-shadow: 2.7928974010788217px 0 1px rgba(185,103,255,0.5), -2.7928974010788217px 0 1px rgba(0,0,255,0.3), 0 0 3px; }
+            /* ... more keyframes ... */
+            100% { text-shadow: 0.4389924193300864px 0 1px rgba(185,103,255,0.5), -0.4389924193300864px 0 1px rgba(0,0,255,0.3), 0 0 3px; }
+        }
+
+        @media (max-width: 768px) {
+            .services {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* New Navigation Styles */
+        .nav-menu {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 100;
+            margin: 0;
+            pointer-events: auto;
+        }
+
+        .nav-menu ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            text-align: right;
+        }
+
+        .nav-menu li {
+            margin: 0 0 0.5rem 0;
+            padding: 0;
+            text-align: right;
+        }
+
+        .nav-menu a {
+            color: var(--text);
+            text-decoration: none;
+            padding: 0.5rem;
+            display: block;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            text-align: right;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary);
+            text-shadow: 0 0 5px var(--primary);
+        }
+
+        /* Section IDs for smooth scrolling */
+        section {
+            scroll-margin-top: 2rem;
+        }
+
+        #starfield {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        /* Ensure other elements stay above the starfield */
+        .container, .nav-menu {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Add styles for the icons and glowing effects */
+        .service-card {
+            position: relative;  /* For icon positioning */
+        }
+
+        .service-card-icon {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            width: 40px;
+            height: 40px;
+            opacity: 0.8;
+            filter: brightness(1.2) drop-shadow(0 0 5px var(--primary));
+            animation: iconGlow 2s ease-in-out infinite;
+        }
+
+        .service-card h2 {
+            animation: titleGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes iconGlow {
+            0% { 
+                filter: brightness(1.2) drop-shadow(0 0 2px var(--primary));
+            }
+            50% { 
+                filter: brightness(1.4) drop-shadow(0 0 8px var(--primary));
+            }
+            100% { 
+                filter: brightness(1.2) drop-shadow(0 0 2px var(--primary));
+            }
+        }
+
+        @keyframes titleGlow {
+            0% { text-shadow: 0 0 5px var(--primary); }
+            50% { text-shadow: 0 0 15px var(--primary); }
+            100% { text-shadow: 0 0 5px var(--primary); }
+        }
+
+        .nav-menu .submenu {
+            list-style: none;
+            margin: 0.2rem 0 0.5rem 1rem;  /* Add indent */
+            padding: 0;
+        }
+
+        .nav-menu .submenu li {
+            margin: 0.2rem 0;
+            font-size: 0.9em;  /* Slightly smaller text */
+        }
+
+        .nav-menu .submenu a {
+            padding: 0.3rem 0.5rem;  /* Smaller padding */
+            opacity: 0.8;  /* Slightly dimmer than main menu */
+        }
+
+        .nav-menu .submenu a:hover {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="starfield"></canvas>
+    <nav class="nav-menu">
+        <ul>
+            <li>
+                <a href="#services">Services</a>
+                <ul class="submenu">
+                    <li><a href="#fractional-ciso">Fractional CISO</a></li>
+                    <li><a href="#product-management">Product Management</a></li>
+                    <li><a href="#expert-calls">Expert Calls</a></li>
+                    <li><a href="#training">Training</a></li>
+                </ul>
+            </li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="https://blog.caffeinesecurity.com" target="_blank">Blog</a></li>
+        </ul>
+    </nav>
+
+    <div class="container crt-effect">
+        <header>
+            <img src="assets/logo.png" alt="Caffeine Security Logo" class="logo">
+        </header>
+
+        <section id="services" class="services">
+            <div class="service-card" id="fractional-ciso">
+                <h2>Fractional CISO</h2>
+                <p>Enhance your startup's security posture with expert leadership without the overhead of a full-time executive. Our fractional CISO service provides strategic guidance, risk management, and security program development tailored to your organization's specific needs and growth stage. We help establish security frameworks, manage compliance requirements, and build security teams that scale.</p>
+                <p>Working closely with your executive team, we develop comprehensive security strategies that align with your business objectives. From implementing security controls and policies to managing vendor relationships and handling security audits, our experienced CISOs bring enterprise-grade security leadership to growing companies. We ensure your security program matures alongside your business.</p>
+            </div>
+            <div class="service-card" id="product-management">
+                <h2>Product Management</h2>
+                <p>Navigate the complex landscape of security product development with our specialized product management expertise. We help security startups define product strategy, build roadmaps, and deliver solutions that address real market needs. Our team brings deep understanding of both security technologies and product development methodologies to help you build products that stand out in a crowded market.</p>
+                <p>From initial concept to market launch, we guide security startups through the entire product lifecycle. We help prioritize features, conduct market research, gather customer feedback, and ensure your security product meets compliance requirements. Our expertise spans authentication systems, threat detection platforms, compliance tools, and other security solutions.</p>
+            </div>
+            <div class="service-card" id="expert-calls">
+                <h2>Expert Calls</h2>
+                <p>Gain valuable insights and strategic guidance through focused consultation sessions with our security experts. Whether you're an investor conducting due diligence, a startup founder evaluating security strategies, or a product manager seeking domain expertise, our consultation calls provide clear, actionable insights tailored to your specific needs and challenges.</p>
+                <p>Our experts bring decades of experience across various security domains including application security, cloud infrastructure, compliance frameworks, and emerging technologies. We provide vendor-neutral advice, market analysis, technical evaluations, and strategic recommendations to help you make informed decisions about security investments and initiatives.</p>
+            </div>
+            <div class="service-card" id="training">
+                <h2>Training</h2>
+                <p>Elevate your team's security awareness and technical capabilities with our customized training programs. We deliver engaging, practical security training that goes beyond compliance checkboxes to create lasting security awareness and behavioral change. Our programs cover everything from basic security awareness to advanced technical training for development and operations teams.</p>
+                <p>Each training program is tailored to your organization's specific needs and technical environment. We incorporate real-world scenarios, hands-on exercises, and relevant case studies to ensure maximum engagement and knowledge retention. Topics include secure coding practices, threat modeling, incident response, social engineering awareness, and security best practices.</p>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <h2>CONTACT US</h2>
+            <p>contact@caffeinesecurity.com</p>
+        </section>
+    </div>
+
+    <script>
+        // Starfield effect
+        const canvas = document.getElementById('starfield');
+        const ctx = canvas.getContext('2d');
+
+        // Set canvas size
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        // Star properties
+        const stars = [];
+        const numStars = 200;
+        const starSpeed = 0.2;
+        const starSize = 1;
+
+        // Create stars
+        for (let i = 0; i < numStars; i++) {
+            stars.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                z: Math.random() * 2,  // Controls star brightness
+                speed: Math.random() * starSpeed + 0.1
+            });
+        }
+
+        // Track scroll speed for star effect
+        let scrollSpeed = 0;
+        let lastScrollTop = 0;
+
+        window.addEventListener('scroll', () => {
+            const st = window.pageYOffset || document.documentElement.scrollTop;
+            scrollSpeed = (st - lastScrollTop) / 100;
+            lastScrollTop = st;
+            
+            // Decay scroll speed
+            setTimeout(() => {
+                scrollSpeed *= 0.9;
+            }, 50);
+        });
+
+        // Animate stars
+        function animateStars() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            stars.forEach(star => {
+                // Calculate star brightness based on scroll speed
+                const brightness = Math.min(0.5 + Math.abs(scrollSpeed) * 0.3, 1);
+                ctx.fillStyle = `rgba(185, 103, 255, ${star.z * brightness * 0.5})`; // Using your primary color
+                
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, starSize, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Move star
+                star.y += star.speed * (1 + Math.abs(scrollSpeed) * 2);
+                
+                // Reset star position when it goes off screen
+                if (star.y > canvas.height) {
+                    star.y = 0;
+                    star.x = Math.random() * canvas.width;
+                }
+            });
+            
+            requestAnimationFrame(animateStars);
+        }
+
+        animateStars();
+
+        // Map of service titles to their specific icons
+        const serviceIconMap = {
+            'Fractional CISO': 'assets/svg/camera.svg',
+            'Product Management': 'assets/svg/chip.svg',
+            'Expert Calls': 'assets/svg/loupe1.svg',
+            'Training': 'assets/svg/doc.svg'
+        };
+
+        // Add icons to service cards
+        document.querySelectorAll('.service-card').forEach(card => {
+            const title = card.querySelector('h2').textContent.trim();
+            const iconPath = serviceIconMap[title];
+            
+            if (iconPath) {
+                const icon = document.createElement('img');
+                icon.src = iconPath;
+                icon.className = 'service-card-icon';
+                icon.alt = `${title} Icon`;
+                card.appendChild(icon);
+                
+                // Offset the animation slightly for each card
+                const delay = Math.random() * 2;
+                icon.style.animationDelay = `${delay}s`;
+                card.querySelector('h2').style.animationDelay = `${delay}s`;
+            }
+        });
+    </script>
+</body>
+</html>
